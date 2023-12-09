@@ -1,4 +1,5 @@
 #Phase 1
+import math
 class Point:
     def __init__(self, x: float, y: float):
         self.x = x
@@ -9,6 +10,9 @@ class Point:
 
     def __repr__(self):
         return self.__str__()
+
+    def distance_from_origin(self) -> float:
+        return math.sqrt(self.x ** 2 + self.y ** 2)
 
 # Example usage:
 p1 = Point(2.3, 43.14)
@@ -67,3 +71,12 @@ print(s6.centroid())  # Output: (0.5/0.5)
 print(s1)
 print(s2)
 print(s3)
+
+# Example usage
+p4 = Point(1, 1)
+p5 = Point(5, 5)
+p6 = Point(10, 10)
+
+print(p4.distance_from_origin())  # Output: 1.4142135623730951
+print(p5.distance_from_origin())  # Output: 7.0710678118654755
+print(p6.distance_from_origin())  # Output: 14.142135623730951
