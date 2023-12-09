@@ -44,7 +44,13 @@ class Shape(list[Point,...]):   #a shape class inherits from a list of points --
 
         return Point(avg_x, avg_y)
 
-# The __str__ method is used to print a single object.
+    def __eq__(self, other):
+        return self.centroid().distance_from_origin() == other.centroid().distance_from_origin()
+
+    def __lt__(self, other):
+        return self.centroid().distance_from_origin() < other.centroid().distance_from_origin()
+
+    # The __str__ method is used to print a single object.
 # The __repr__ method is used to print a collection of objects (like when using print([p1, p2, p3]) in the example).
     def centroid(self) -> Point:
         if not self.points:
@@ -80,3 +86,11 @@ p6 = Point(10, 10)
 print(p4.distance_from_origin())  # Output: 1.4142135623730951
 print(p5.distance_from_origin())  # Output: 7.0710678118654755
 print(p6.distance_from_origin())  # Output: 14.142135623730951
+
+print(s4 == s5)  # Output: True
+s5 = Shape(Point(5, 5), Point(5, 6), Point(6, 6), Point(6, 5))
+print(s4 < s5)   # Output: True
+s6 = Shape(Point(10, 10), Point(10, 11), Point(11, 11), Point(11, 10))
+shapes = [s6,s4, s5]
+print(shapes)    # Output: [Shape [(10/10), (10/11), (11/11), (11/10)], Shape [(0/0), (0/1), (1/1), (1/0)], Shape [(5/5), (5/6), (6/6), (6/5)]]
+print(sorted(shapes))  # Output: [Shape [(0/0), (0/1), (1/1), (1/0)], Shape [(5/5), (5/6), (6/6), (6/5)], Shape [(10/10), (10/11), (11/11), (11/10)]]
